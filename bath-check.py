@@ -8,7 +8,7 @@ student_phone = ""
 student_sex = "" # 1 for male, 2 for female
 student_time = 0
 
-with open('./student.json') as json_file:
+with open('/home/tlss/student.json') as json_file:
     data = json.load(json_file)
     student_name = data['name']
     student_phone = data['phone']
@@ -16,7 +16,7 @@ with open('./student.json') as json_file:
     student_time = data['time']
 
 op = webdriver.ChromeOptions()
-op.add_argument('headless') # run in background
+# op.add_argument('headless') # run in background
 driver = webdriver.Chrome(options=op)
 bath_search = driver.get('http://hqserver.jlu.edu.cn/yuci.php?xy=xiyucha')
 
@@ -37,14 +37,14 @@ select_date.select_by_index(1)
 
 # select time
 select_time = Select(driver.find_element_by_name("o"))
-t = student_time-14+1
+t = student_time
 select_time.select_by_index(t)
 
 # select sex
 select_sex = Select(driver.find_element_by_name("s"))
 select_sex.select_by_value(student_sex)
 
-#  time.sleep(100)
+# time.sleep(100)
 
 # click search button
 btn_search = driver.find_element_by_name("Submit")

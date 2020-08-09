@@ -9,7 +9,7 @@ student_id = ""
 student_sex = "" # 1 for male, 2 for female
 student_time = 0
 
-with open('./student.json') as json_file:
+with open('/home/tlss/student.json') as json_file:
     data = json.load(json_file)
     student_name = data['name']
     student_phone = data['phone']
@@ -18,7 +18,7 @@ with open('./student.json') as json_file:
     student_time = data['time']
 
 op = webdriver.ChromeOptions()
-op.add_argument('headless') # run in background
+# op.add_argument('headless') # run in background
 driver = webdriver.Chrome(options=op)
 driver.get('http://hqserver.jlu.edu.cn/yuci.php?xy=addxiyu1&from=singlemessage')
 
@@ -32,7 +32,7 @@ date[0].click()
 
 # select time
 times = driver.find_elements_by_xpath("//*[@href]")
-idx = int(student_sex)-1 + (student_time-14)*2
+idx = int(student_sex)-1 + (int(student_time)-1)*2
 times[idx].click()
 
 # fill name
@@ -50,13 +50,13 @@ sexs = driver.find_element_by_css_selector("input[type='radio'][value='"+student
 
 # click the submit button
 submit = driver.find_element_by_id('Submit')
-#  time.sleep(5)
+# time.sleep(5)
 submit.click()
 
 # confirm to book
 alert = driver.switch_to.alert
 alert.accept()
-#  alert.dismiss()
+# alert.dismiss()
 
 time.sleep(1)
 
